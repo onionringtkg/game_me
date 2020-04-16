@@ -1,0 +1,19 @@
+- @title = "メニュー選択"
+
+h1 = @shop.name
+div
+  table
+    tr
+      th = Shop.human_attribute_name(:delivery_fee)
+      td #{@shop.delivery_fee}円
+    tr
+      th = Shop.human_attribute_name(:minimum_order_amount)
+      td #{@shop.minimum_order_amount}円〜
+  = link_to "店舗詳細", @shop
+
+div
+  h2 = @title
+  - @shop.menu_items.each do |menu_item|
+    div
+      = link_to [@shop, menu_item]
+        | #{menu_item.name} #{menu_item.price}円

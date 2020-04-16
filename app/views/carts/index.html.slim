@@ -1,0 +1,20 @@
+- @title = "カート一覧"
+
+h1 = @title
+- unless current_carts_items_count.zero?
+  - current_carts.each do |cart|
+    div
+      h2 = cart.shop.name
+      table
+        tr
+          th 注文点数:
+          td = cart.count_items
+        tr
+          th = Shop.human_attribute_name(:delivery_fee) + ":"
+          td = cart.shop.delivery_fee
+        tr
+          th 合計金額:
+          td = total_amount cart
+      = link_to "お会計に進む", [cart.shop, :cart]
+- else
+  p カートが空です。

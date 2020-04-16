@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      user: アカウント情報
+    attributes:
+      shop:
+        name: 名前
+        address: 住所
+        phone_number: 電話番号
+        delivery_fee: 送料
+        reception_time: 受付時間
+        minimum_order_amount: 最低注文金額
+      menu_item:
+        name: 名前
+        price: 値段
+      cart_item:
+        name: 名前
+        price: 値段
+        number: 数量

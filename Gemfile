@@ -20,6 +20,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'mini_racer'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'slim-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

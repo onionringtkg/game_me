@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#index'
+  root "home#index"
+  resources :shops, only: %i[index show] do
+    resources :menu_items, only: %i[index show] do
+      post "add_cart" => "carts#add"
+    end
+    resource :cart, only: %i[show]
+  end
+  resources :carts, only: %i[index]
 end
