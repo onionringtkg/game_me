@@ -1,20 +1,24 @@
 - @title = "カートの内容"
 
 h1 = @title
-h2 = @shop.name
+h2 = link_to @shop.name, [@shop, :menu_items]
 - if @cart.cart_items.present?
   - @cart.cart_items.each do |cart_item|
     div
       div = cart_item.name
       | #{cart_item.price}円
-      table
-        tr
-          th #{CartItem.human_attribute_name(:number)}:
-          td = cart_item.number
-        tr
-          th 小計:
-          td #{subtotal(cart_item)}円
+      = form_with model: cart_item, url: [@shop, :cart, cart_item],
+                  local: true do |f|
+        table
+          tr
+            th #{CartItem.human_attribute_name(:number)}:
+            td = f.select :number, 1..20
+          tr
+            th 小計:
+            td #{subtotal(cart_item)}円
+        = f.submit "更新"
       div = link_to "削除", [@shop, :cart, cart_item], method: :delete
+    br
   div
     table
       tr

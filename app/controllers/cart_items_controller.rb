@@ -3,11 +3,12 @@
 class CartItemsController < ApplicationController
   def create
     cart_item = CartItem.new(cart_item_params)
-    cart = current_cart(shop_id: params[:shop_id])
-    cart.add(cart_item)
-    if cart.save
-      unless user_signed_in? || (session[:cart_ids] ||= []).include?(cart.id)
-        session[:cart_ids].push(cart.id)
+    current_cart = current_cart(shop_id: params[:shop_id])
+    current_cart.add(cart_item)
+    if current_cart.save
+      unless user_signed_in? ||
+             (session[:cart_ids] ||= []).include?(current_cart.id)
+        session[:cart_ids].push(current_cart.id)
       end
     end
     if params[:go_menu]
@@ -16,6 +17,14 @@ class CartItemsController < ApplicationController
     else
       redirect_to "/shops/#{params[:shop_id]}/cart"
     end
+  end
+
+  def update
+    current_cart = current_cart(shop_id: params[:shop_id])
+    cart_item = current_cart.cart_items.find(params[:id])
+    cart_item.assign_attributes(cart_item_params)
+    cart_item.save
+    redirect_to "/shops/#{params[:shop_id]}/cart"
   end
 
   def destroy

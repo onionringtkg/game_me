@@ -4,7 +4,7 @@ h1 = @title
 - unless current_carts_items_count.zero?
   - current_carts.each do |cart|
     div
-      h2 = cart.shop.name
+      h2 = link_to cart.shop.name, [cart.shop, :menu_items]
       table
         tr
           th 注文点数:
@@ -16,5 +16,6 @@ h1 = @title
           th 合計金額:
           td #{total_amount(cart)}円
       = link_to "お会計に進む", [cart.shop, :cart]
+    br
 - else
   p カートが空です。

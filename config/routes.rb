@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       post "add_cart" => "cart_items#create"
     end
     resource :cart, only: %i[show] do
-      resources :cart_items, only: %i[destroy]
+      resources :cart_items, only: %i[update destroy]
     end
   end
   resources :carts, only: %i[index]
