@@ -11,10 +11,10 @@ h1 = @title
           td = cart.count_items
         tr
           th = Shop.human_attribute_name(:delivery_fee) + ":"
-          td = cart.shop.delivery_fee
+          td #{cart.shop.delivery_fee}円
         tr
           th 合計金額:
-          td = total_amount cart
+          td #{total_amount(cart)}円
       = link_to "お会計に進む", [cart.shop, :cart]
 - else
   p カートが空です。

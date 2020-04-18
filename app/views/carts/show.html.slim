@@ -10,22 +10,22 @@ h2 = @shop.name
       | #{cart_item.price}円
       table
         tr
-          th = CartItem.human_attribute_name(:number)
+          th #{CartItem.human_attribute_name(:number)}:
           td = cart_item.number
         tr
-          th 小計
+          th 小計:
           td #{subtotal(cart_item)}円
       p
   div
     table
       tr
-        th = Shop.human_attribute_name(:delivery_fee)
+        th #{Shop.human_attribute_name(:delivery_fee)}:
         td #{@shop.delivery_fee}円
       tr
-        th 合計数量
+        th 合計数量:
         td = @cart.count_items
       tr
-        th 合計
+        th 合計:
         td #{total_amount(@cart)}円
 - else
   p カートが空です。
