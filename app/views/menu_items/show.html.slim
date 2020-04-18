@@ -6,6 +6,7 @@ h2 = @menu_item.name
 p = @menu_item.price
 = form_with model: @cart_item, url: [@shop, @menu_item, :add_cart],
             local: true do |f|
+  = f.hidden_field :menu_item_id, value: @menu_item.id
   table
     tr
       th = f.label :number

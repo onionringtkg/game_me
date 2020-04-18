@@ -2,7 +2,6 @@
 
 h1 = @title
 h2 = @shop.name
-
 - if @cart.cart_items.present?
   - @cart.cart_items.each do |cart_item|
     div
@@ -15,7 +14,7 @@ h2 = @shop.name
         tr
           th 小計:
           td #{subtotal(cart_item)}円
-      p
+      div = link_to "削除", [@shop, :cart, cart_item], method: :delete
   div
     table
       tr

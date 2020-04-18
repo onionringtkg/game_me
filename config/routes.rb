@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root "home#index"
   resources :shops, only: %i[index show] do
     resources :menu_items, only: %i[index show] do
-      post "add_cart" => "carts#add"
+      post "add_cart" => "cart_items#create"
     end
-    resource :cart, only: %i[show]
+    resource :cart, only: %i[show] do
+      resources :cart_items, only: %i[destroy]
+    end
   end
   resources :carts, only: %i[index]
 end

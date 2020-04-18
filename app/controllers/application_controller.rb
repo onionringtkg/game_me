@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_cart(shop_id)
+  def current_cart(shop_id: shop_id)
     current_carts&.find_by(shop_id: shop_id) ||
       if user_signed_in?
         current_user.carts.build(shop_id: shop_id)
