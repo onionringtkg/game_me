@@ -33,7 +33,7 @@ module ApplicationHelper
       cart.shop.delivery_fee
   end
 
-  def subtotal(cart_item)
-    cart_item.price * cart_item.number
+  def subtotal(item)
+    item.price * item.number
   end
 end

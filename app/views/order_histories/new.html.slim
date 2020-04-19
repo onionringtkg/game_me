@@ -1,0 +1,33 @@
+- @title = "注文"
+
+div
+  h1 お届け先
+  = form_with model: @order_history, url: [@order_history.shop, ] do |f|
+  table
+    tr
+      th = OrderHistory.human_attribute_name(:orderer_name)
+      td = @order_history.orderer_name
+    tr
+      th = OrderHistory.human_attribute_name(:orderer_address)
+      td = @order_history.orderer_address
+    tr
+      th = OrderHistory.human_attribute_name(:orderer_phone_number)
+      td = @order_history.orderer_phone_number
+div
+  h1 カートの内容
+  - @order_history.ordered_items.each do |ordered_item|
+    div
+      div = ordered_item.name
+      div #{ordered_item.price}円
+      table
+        tr
+          th = OrderedItem.human_attribute_name(:number)
+          td = ordered_item.number
+        tr
+          th 小計
+          td #{subtotal(ordered_item)}円
+    br
+  table
+    tr
+      th 合計数量
+      td

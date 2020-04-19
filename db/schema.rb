@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_072908) do
+ActiveRecord::Schema.define(version: 2020_04_11_232445) do
 
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "cart_id", null: false
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 2020_04_17_072908) do
   end
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "shop_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_carts_on_shop_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "menu_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -39,13 +41,15 @@ ActiveRecord::Schema.define(version: 2020_04_17_072908) do
   end
 
   create_table "order_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "shop_id"
-    t.string "addressee", null: false
-    t.string "delivery_address", null: false
-    t.string "phone_number", null: false
+    t.string "orderer_name", null: false
+    t.string "orderer_address", null: false
+    t.string "orderer_phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_order_histories_on_shop_id"
+    t.index ["user_id"], name: "index_order_histories_on_user_id"
   end
 
   create_table "ordered_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -81,6 +85,8 @@ ActiveRecord::Schema.define(version: 2020_04_17_072908) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "address", null: false
+    t.string "phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -90,7 +96,9 @@ ActiveRecord::Schema.define(version: 2020_04_17_072908) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "menu_items"
   add_foreign_key "carts", "shops"
+  add_foreign_key "carts", "users"
   add_foreign_key "menu_items", "shops"
   add_foreign_key "order_histories", "shops"
+  add_foreign_key "order_histories", "users"
   add_foreign_key "ordered_items", "menu_items"
 end

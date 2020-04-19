@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  def current_user; end
-  def user_signed_in?; end
-
-
   helper_method :current_carts
 
   def current_carts
@@ -15,14 +11,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_cart(shop_id)
+  def current_cart(shop_id: shop_id)
     current_carts&.find_by(shop_id: shop_id) ||
       if user_signed_in?
-        current_user.carts.create(shop_id: shop_id)
+        current_user.carts.build(shop_id: shop_id)
       else
-        (cart = Cart.create(shop_id: shop_id))
-        (session[:cart_ids] ||= []).push(cart.id)
-        cart
+        Cart.new(shop_id: shop_id)
       end
   end
 end
