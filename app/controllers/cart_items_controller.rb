@@ -7,7 +7,7 @@ class CartItemsController < ApplicationController
     current_cart.add(cart_item)
     if current_cart.save
       unless user_signed_in? ||
-             (session[:cart_ids] ||= []).include?(current_cart.id)
+        (session[:cart_ids] ||= []).include?(current_cart.id)
         session[:cart_ids].push(current_cart.id)
       end
     end
@@ -28,7 +28,11 @@ class CartItemsController < ApplicationController
   end
 
   def destroy
-    CartItem.find(params[:id]).destroy
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
+    unless user_signed_in? || Cart.find_by(id: cart_item.cart.id)
+      session[:cart_ids].delete(cart_item.cart.id)
+    end
     redirect_to "/shops/#{params[:shop_id]}/cart"
   end
 

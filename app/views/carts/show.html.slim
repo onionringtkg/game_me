@@ -11,10 +11,10 @@ h2 = link_to @shop.name, [@shop, :menu_items]
                   local: true do |f|
         table
           tr
-            th #{CartItem.human_attribute_name(:number)}:
+            th = f.label :number
             td = f.select :number, 1..20
           tr
-            th 小計:
+            th 小計
             td #{subtotal(cart_item)}円
         = f.submit "更新"
       div = link_to "削除", [@shop, :cart, cart_item], method: :delete
@@ -22,13 +22,13 @@ h2 = link_to @shop.name, [@shop, :menu_items]
   div
     table
       tr
-        th #{Shop.human_attribute_name(:delivery_fee)}:
+        th #{Shop.human_attribute_name(:delivery_fee)}
         td #{@shop.delivery_fee}円
       tr
-        th 合計数量:
+        th 合計数量
         td = @cart.count_items
       tr
-        th 合計:
+        th 合計
         td #{total_amount(@cart)}円
 - else
   p カートが空です。

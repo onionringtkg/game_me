@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
   create_table "order_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "shop_id"
-    t.string "addressee", null: false
-    t.string "delivery_address", null: false
-    t.string "phone_number", null: false
+    t.string "orderer_name", null: false
+    t.string "orderer_address", null: false
+    t.string "orderer_phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_order_histories_on_shop_id"
