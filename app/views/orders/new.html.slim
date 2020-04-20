@@ -36,5 +36,5 @@ div
       td #{@order.delivery_fee}円
     tr
       th 合計金額
-      td = total_amount(@order)
+      td #{total_amount(@order)}円
 = link_to "注文を確定する", [@order.shop, :order], method: :post
