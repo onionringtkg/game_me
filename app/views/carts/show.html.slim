@@ -30,7 +30,7 @@ h2 = link_to @shop.name, [@shop, :menu_items]
       tr
         th 合計
         td #{total_amount(@cart)}円
-    = form_with url: [:new, @shop, :order], method: :post, local: true do |f|
+    = form_with url: [:pay, @shop, :order], method: :post, local: true do |f|
       script.payjp-button*{ src: "https://checkout.pay.jp",
                             type: "text/javascript",
                             "data-key" => "pk_test_b22a50ac4232d8e5dedda759",

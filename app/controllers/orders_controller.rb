@@ -35,4 +35,13 @@ class OrdersController < ApplicationController
     end
     redirect_to :orders
   end
+
+  def pay
+    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+    charge = Payjp::Charge.create(
+      amount: 500,
+      card: params['payjp-token'],
+      currency: 'jpy'
+    )
+  end
 end

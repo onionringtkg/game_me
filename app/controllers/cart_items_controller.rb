@@ -36,14 +36,6 @@ class CartItemsController < ApplicationController
     redirect_to "/shops/#{params[:shop_id]}/cart"
   end
 
-  def pay
-    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-    charge = Payjp::Charge.create(
-    amount: 500,
-    card: params['payjp-token'],
-    currency: 'jpy'
-    )
-  end
 
   private
 
