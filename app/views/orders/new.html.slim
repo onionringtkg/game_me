@@ -1,0 +1,40 @@
+- @title = "注文"
+
+h1 = @title
+div
+  h2 お届け先
+  table
+    tr
+      th = Order.human_attribute_name(:orderer_name)
+      td = @order.orderer_name
+    tr
+      th = Order.human_attribute_name(:orderer_address)
+      td = @order.orderer_address
+    tr
+      th = Order.human_attribute_name(:orderer_phone_number)
+      td = @order.orderer_phone_number
+div
+  h2 カートの内容
+  - @order.ordered_items.each do |ordered_item|
+    div
+      div = ordered_item.name
+      div #{ordered_item.price}円
+      table
+        tr
+          th = OrderedItem.human_attribute_name(:number)
+          td = ordered_item.number
+        tr
+          th 小計
+          td #{subtotal(ordered_item)}円
+    br
+  table
+    tr
+      th 合計数量
+      td = total_number(@order.ordered_items)
+    tr
+      th = Order.human_attribute_name(:delivery_fee)
+      td #{@order.delivery_fee}円
+    tr
+      th 合計金額
+      td = total_amount(@order)
+= link_to "注文を確定する", [@order.shop, :order], method: :post

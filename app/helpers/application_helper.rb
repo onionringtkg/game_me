@@ -24,13 +24,22 @@ module ApplicationHelper
     end
   end
 
-  def current_carts_items_count
-    current_carts&.map(&:count_items)&.sum || 0
+  def count_current_carts_items
+    current_carts&.inject(0) { |result, cart| result + cart.count_items } || 0
   end
 
-  def total_amount(cart)
-    cart.cart_items.map { |item| item.price * item.number }.sum +
-      cart.shop.delivery_fee
+  def total_number(items)
+    items.inject(0) { |result, item| result + item.number }
+  end
+
+  def total_amount(obj)
+    items = if obj.is_a? Cart
+              obj.cart_items
+            elsif obj.is_a? Order
+              obj.ordered_items
+            end
+    delivery_fee = obj.shop.delivery_fee
+    items.inject(delivery_fee) { |result, item| result + subtotal(item) }
   end
 
   def subtotal(item)

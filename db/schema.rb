@@ -40,19 +40,8 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
     t.index ["shop_id"], name: "index_menu_items_on_shop_id"
   end
 
-  create_table "order_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "shop_id"
-    t.string "orderer_name", null: false
-    t.string "orderer_address", null: false
-    t.string "orderer_phone_number", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["shop_id"], name: "index_order_histories_on_shop_id"
-    t.index ["user_id"], name: "index_order_histories_on_user_id"
-  end
-
   create_table "ordered_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "order_id", null: false
     t.bigint "menu_item_id"
     t.string "name", null: false
     t.integer "price", null: false
@@ -60,6 +49,20 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_item_id"], name: "index_ordered_items_on_menu_item_id"
+    t.index ["order_id"], name: "index_ordered_items_on_order_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "shop_id"
+    t.string "orderer_name", null: false
+    t.string "orderer_address", null: false
+    t.string "orderer_phone_number", null: false
+    t.integer "delivery_fee", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_orders_on_shop_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -85,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name", null: false
     t.string "address", null: false
     t.string "phone_number", null: false
     t.datetime "created_at", null: false
@@ -98,7 +102,8 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
   add_foreign_key "carts", "shops"
   add_foreign_key "carts", "users"
   add_foreign_key "menu_items", "shops"
-  add_foreign_key "order_histories", "shops"
-  add_foreign_key "order_histories", "users"
   add_foreign_key "ordered_items", "menu_items"
+  add_foreign_key "ordered_items", "orders"
+  add_foreign_key "orders", "shops"
+  add_foreign_key "orders", "users"
 end

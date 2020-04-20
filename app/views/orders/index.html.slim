@@ -1,0 +1,11 @@
+- @title = "注文履歴"
+
+h1 = @title
+- if @orders.present?
+  - @orders.each do |order|
+    div = order.inspect
+    - order.ordered_items.each do |ordered_item|
+      div = ordered_item.inspect
+    br
+- else
+  p 注文履歴がありません。

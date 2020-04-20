@@ -8,7 +8,7 @@ class CartItemsController < ApplicationController
     if current_cart.save
       unless user_signed_in? ||
         (session[:cart_ids] ||= []).include?(current_cart.id)
-        session[:cart_ids].push(current_cart.id)
+        session[:cart_ids] << current_cart.id
       end
     end
     if params[:go_menu]
