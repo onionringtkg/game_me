@@ -36,15 +36,6 @@ class CartItemsController < ApplicationController
     redirect_to "/shops/#{params[:shop_id]}/cart"
   end
 
-  private
-
-  def cart_item_params
-    params.require(:cart_item).permit(
-      :menu_item_id,
-      :number
-    )
-  end
-
   def pay
     /決済する際に、どうやって決済情報持ってくる？？
       候補①　idで全商品検索する
@@ -59,4 +50,14 @@ class CartItemsController < ApplicationController
     )
     /response取得して、DBに保存/
   end
+
+  private
+
+  def cart_item_params
+    params.require(:cart_item).permit(
+      :menu_item_id,
+      :number
+    )
+  end
+
 end
