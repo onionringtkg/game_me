@@ -22,13 +22,14 @@ h2 = link_to @shop.name, [@shop, :menu_items]
   div
     table
       tr
-        th #{Shop.human_attribute_name(:delivery_fee)}
-        td #{@shop.delivery_fee}円
-      tr
         th 合計数量
         td = @cart.count_items
       tr
+        th = Shop.human_attribute_name(:delivery_fee)
+        td #{@shop.delivery_fee}円
+      tr
         th 合計
         td #{total_amount(@cart)}円
+  = link_to "レジに進む", [:new, @shop, :order]
 - else
   p カートが空です。

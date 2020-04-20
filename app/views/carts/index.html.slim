@@ -1,7 +1,7 @@
 - @title = "カート一覧"
 
 h1 = @title
-- unless current_carts_items_count.zero?
+- unless count_current_carts_items.zero?
   - current_carts.each do |cart|
     div
       h2 = link_to cart.shop.name, [cart.shop, :menu_items]
