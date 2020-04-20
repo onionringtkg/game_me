@@ -25,6 +25,9 @@ gem 'devise'
 gem 'payjp'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'carrierwave'  # 画像アップロード用
+gem 'fog-aws'      # AWS S3連携用
+gem 'rmagick'      # 画像処理用
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
