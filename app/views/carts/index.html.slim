@@ -4,7 +4,7 @@ h1 = @title
 - unless count_current_carts_items.zero?
   - current_carts.each do |cart|
     div
-      h2 = link_to cart.shop.name, [cart.shop, :menu_items]
+      h2 = cart.shop.name
       table
         tr
           th 注文点数

@@ -1,12 +1,13 @@
 - @title = "カートの内容"
 
 h1 = @title
-h2 = link_to @shop.name, [@shop, :menu_items]
+h2 = @shop.name
 - if @cart.cart_items.present?
   - @cart.cart_items.each do |cart_item|
     div
+      = image_tag cart_item.picture.small.url
       div = cart_item.name
-      | #{cart_item.price}円
+      div #{cart_item.price}円
       = form_with model: cart_item, url: [@shop, :cart, cart_item],
         local: true do |f|
         table

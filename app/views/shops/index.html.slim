@@ -3,5 +3,8 @@ h1 = @title
 
 div
   - @shops.each do |shop|
-    div = link_to shop.name, [shop, :menu_items]
+    div
+      = link_to [shop, :menu_items] do
+        div = shop.name
+        = image_tag shop.menu_items.first.picture.medium.url
     br

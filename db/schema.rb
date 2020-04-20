@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
 
   create_table "menu_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "shop_id", null: false
+    t.string "picture", null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_232445) do
   end
 
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "picture", null: false
     t.string "address", null: false
     t.string "phone_number", null: false
     t.string "name", null: false

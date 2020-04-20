@@ -3,6 +3,7 @@
 class CreateShops < ActiveRecord::Migration[5.2]
   def change
     create_table :shops do |t|
+      t.string :picture, null: false
       t.string :address, null: false
       t.string :phone_number, null: false
       t.string :name, null: false

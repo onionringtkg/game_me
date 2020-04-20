@@ -4,4 +4,6 @@ class MenuItem < ApplicationRecord
   belongs_to :shop
   has_many :cart_items, dependent: :destroy
   has_many :ordered_items, dependent: :nullify
+
+  mount_uploader :picture, MenuItemPictureUploader
 end

@@ -3,7 +3,8 @@
 h1 = @shop.name
 p = link_to "メニュー選択に戻る", [@shop, :menu_items]
 h2 = @menu_item.name
-p = @menu_item.price
+div = image_tag @menu_item.picture.large.url
+div #{@menu_item.price}円
 = form_with model: @cart_item, url: [@shop, @menu_item, :add_cart],
             local: true do |f|
   = f.hidden_field :menu_item_id, value: @menu_item.id

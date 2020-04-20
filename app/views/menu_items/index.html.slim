@@ -1,6 +1,7 @@
 - @title = "メニュー選択"
 
 h1 = @shop.name
+div = image_tag @shop.picture.small.url
 div
   table
     tr
@@ -15,6 +16,8 @@ div
   h2 = @title
   - @shop.menu_items.each do |menu_item|
     div
-      = link_to [@shop, menu_item]
-        | #{menu_item.name} #{menu_item.price}円
+      = link_to [@shop, menu_item] do
+        div = menu_item.name
+        div #{menu_item.price}円
+        = image_tag menu_item.picture.medium.url
     br
