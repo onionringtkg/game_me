@@ -30,5 +30,13 @@ h2 = link_to @shop.name, [@shop, :menu_items]
       tr
         th 合計
         td #{total_amount(@cart)}円
+   = form_with url: [:pay_money],local: true do |f|
+    <script type="text/javascript" 
+    | src="https://checkout.pay.jp/" 
+      class="payjp-button" 
+      data-key="pk_test_b22a50ac4232d8e5dedda759" 
+      data-submit-text="決済を完了する" 
+      data-partial="true">
+    </script>
 - else
   p カートが空です。

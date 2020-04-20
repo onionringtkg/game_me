@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     resource :cart, only: %i[show] do
       resources :cart_items, only: %i[update destroy]
+       post "pay_money" => "cart_items#pay"
     end
     resource :order, controller: :order_histories, only: %i[new create]
   end

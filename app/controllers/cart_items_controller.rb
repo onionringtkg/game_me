@@ -37,18 +37,12 @@ class CartItemsController < ApplicationController
   end
 
   def pay
-    /決済する際に、どうやって決済情報持ってくる？？
-      候補①　idで全商品検索する
-      候補②　cartIDとかで一撃で全部検索してくる？？
-    /
-    @item = CartItem.find(params[:id])
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     charge = Payjp::Charge.create(
-    amount: @item.price,
+    amount: 500,
     card: params['payjp-token'],
     currency: 'jpy'
     )
-    /response取得して、DBに保存/
   end
 
   private
