@@ -1,22 +1,21 @@
 - @title = "店舗詳細"
-h1 = @shop.name
-div = image_tag @shop.picture.small.url
-div
-  table
-    tr
-      th = Shop.human_attribute_name(:reception_time)
-      td = reception_time(@shop)
-    tr
-      th = Shop.human_attribute_name(:delivery_fee)
-      td #{@shop.delivery_fee}円
-    tr
-      th = Shop.human_attribute_name(:minimum_order_amount)
-      td #{@shop.minimum_order_amount}円〜
-    tr
-      th = Shop.human_attribute_name(:address)
-      td = @shop.address
-    tr
-      th = Shop.human_attribute_name(:phone_number)
-      td = @shop.phone_number
+div#shop_about
+  h1 = @shop.name
+  div = image_tag @shop.picture.small.url
+  dl
+    dt = Shop.human_attribute_name(:reception_time)
+    dd = reception_time(@shop)
 
-= link_to "メニュー選択に戻る", [@shop, :menu_items]
+    dt = Shop.human_attribute_name(:delivery_fee)
+    dd #{@shop.delivery_fee}円
+
+    dt = Shop.human_attribute_name(:minimum_order_amount)
+    dd #{@shop.minimum_order_amount}円〜
+
+    dt = Shop.human_attribute_name(:address)
+    dd = @shop.address
+
+    dt = Shop.human_attribute_name(:phone_number)
+    dd = @shop.phone_number
+
+  = link_to "メニュー選択に戻る", [@shop, :menu_items]

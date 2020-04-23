@@ -1,23 +1,19 @@
-- @title = "メニュー選択"
+- @title = "MENU"
+div#shop_menu
+  h1 = @shop.name
+  div
+    = image_tag @shop.picture.small.url
+    dl
+      dt = Shop.human_attribute_name(:delivery_fee)
+      dd #{@shop.delivery_fee}円
+      dt = Shop.human_attribute_name(:minimum_order_amount)
+      dd #{@shop.minimum_order_amount}円〜
+  = link_to "About us", @shop
 
-h1 = @shop.name
-div = image_tag @shop.picture.small.url
-div
-  table
-    tr
-      th = Shop.human_attribute_name(:delivery_fee)
-      td #{@shop.delivery_fee}円
-    tr
-      th = Shop.human_attribute_name(:minimum_order_amount)
-      td #{@shop.minimum_order_amount}円〜
-  = link_to "店舗詳細", @shop
-
-div
   h2 = @title
-  - @shop.menu_items.each do |menu_item|
-    div
-      = link_to [@shop, menu_item] do
-        div = menu_item.name
-        div #{menu_item.price}円
-        = image_tag menu_item.picture.medium.url
-    br
+  div#menu_container
+    - @shop.menu_items.each do |menu_item|
+      = link_to [@shop, menu_item],class: 'menu_body' do
+        = image_tag menu_item.picture.medium.url,class:"menu_img"
+        p.menu_name = menu_item.name
+        p.menu_price #{menu_item.price}円

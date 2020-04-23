@@ -1,17 +1,20 @@
 - @title = @menu_item.name
+div#menu_selected
+  h1 = @shop.name
+  = link_to "メニュー選択に戻る", [@shop, :menu_items]
 
-h1 = @shop.name
-p = link_to "メニュー選択に戻る", [@shop, :menu_items]
-h2 = @menu_item.name
-div = image_tag @menu_item.picture.large.url
-div #{@menu_item.price}円
-= form_with model: @cart_item, url: [@shop, @menu_item, :add_cart],
-            local: true do |f|
-  = f.hidden_field :menu_item_id, value: @menu_item.id
-  table
-    tr
-      th = f.label :number
-      td = f.select :number, 1..20
-  = f.submit "カートに入れてお買い物を続ける", name: :go_menu
-  '
-  = f.submit "カートに入れてお会計をする", name: :go_payment
+  div
+    div
+      = image_tag @menu_item.picture.large.url,class:"menu_img"
+      h2.menu_name = @menu_item.name
+      p.menu_price #{@menu_item.price}円
+
+    = form_with model: @cart_item, url: [@shop, @menu_item, :add_cart],
+                local: true do |f|
+      = f.hidden_field :menu_item_id, value: @menu_item.id
+      div
+        = f.label :number
+        = f.select :number, 1..20
+      = f.submit "カートに入れてお買い物を続ける", name: :go_menu
+      '
+      = f.submit "カートに入れてお会計をする", name: :go_payment

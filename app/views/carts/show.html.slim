@@ -1,41 +1,41 @@
 - @title = "カートの内容"
-
-h1 = @title
-h2 = @shop.name
-- if @cart.cart_items.present?
-  - @cart.cart_items.each do |cart_item|
+div#cart_detail
+  h1 = @title
+  h2 = @shop.name
+  - if @cart.cart_items.present?
+    - @cart.cart_items.each do |cart_item|
+      div
+        = image_tag cart_item.picture.small.url
+        div = cart_item.name
+        div #{cart_item.price}円
+        = form_with model: cart_item, url: [@shop, :cart, cart_item],
+          local: true do |f|
+          table
+            tr
+              th = f.label :number
+              td = f.select :number, 1..20
+            tr
+              th 小計
+              td #{subtotal(cart_item)}円
+          = f.submit "更新"
+        div = link_to "削除", [@shop, :cart, cart_item], method: :delete
+      br
     div
-      = image_tag cart_item.picture.small.url
-      div = cart_item.name
-      div #{cart_item.price}円
-      = form_with model: cart_item, url: [@shop, :cart, cart_item],
-        local: true do |f|
-        table
-          tr
-            th = f.label :number
-            td = f.select :number, 1..20
-          tr
-            th 小計
-            td #{subtotal(cart_item)}円
-        = f.submit "更新"
-      div = link_to "削除", [@shop, :cart, cart_item], method: :delete
-    br
-  div
-    table
-      tr
-        th 合計数量
-        td = @cart.count_items
-      tr
-        th = Shop.human_attribute_name(:delivery_fee)
-        td #{@shop.delivery_fee}円
-      tr
-        th 合計
-        td #{total_amount(@cart)}円
-    = form_with url: [:pay, @shop, :order], method: :post, local: true do |f|
-      script.payjp-button*{ src: "https://checkout.pay.jp",
-                            type: "text/javascript",
-                            "data-key" => "pk_test_b22a50ac4232d8e5dedda759",
-                            "data-submit-text" => "決済を完了する",
-                            "data-partial" => "true" }
-- else
-  p カートが空です。
+      table
+        tr
+          th 合計数量
+          td = @cart.count_items
+        tr
+          th = Shop.human_attribute_name(:delivery_fee)
+          td #{@shop.delivery_fee}円
+        tr
+          th 合計
+          td #{total_amount(@cart)}円
+      = form_with url: [:pay, @shop, :order], method: :post, local: true do |f|
+        script.payjp-button*{ src: "https://checkout.pay.jp",
+                              type: "text/javascript",
+                              "data-key" => "pk_test_b22a50ac4232d8e5dedda759",
+                              "data-submit-text" => "決済を完了する",
+                              "data-partial" => "true" }
+  - else
+    p カートが空です。
