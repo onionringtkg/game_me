@@ -28,6 +28,7 @@ gem 'devise-i18n-views'
 gem 'carrierwave'  # 画像アップロード用
 gem 'fog-aws'      # AWS S3連携用
 gem 'mini_magick'      # 画像処理用
+gem 'config'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
